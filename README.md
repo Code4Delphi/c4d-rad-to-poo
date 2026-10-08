@@ -18,6 +18,7 @@ Na prática, a skill:
 - **Pergunta o prefixo** das novas units. Com `Clientes`, por exemplo, gera `Clientes.Model`, `Clientes.Repo` e `Clientes.Service`.
 - **Levanta as regras do legado**, sem alterar nada. Elas vêm dos eventos do DataModule, das propriedades dos campos e das restrições do banco.
 - **Mostra um plano** com a tabela de campos e os arquivos afetados, e espera a sua confirmação.
+- **Faz uma pergunta por vez**, inclusive as decisões do plano, e espera a resposta antes de fazer a próxima.
 - **Escreve as camadas** e troca os componentes DB-aware pelos equivalentes comuns da VCL.
 - **Mantém o grid sincronizado** com os campos da tela.
 - **Valida os `.dfm`** com o `convert.exe`.

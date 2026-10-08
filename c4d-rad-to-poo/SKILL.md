@@ -22,10 +22,13 @@ Transforma um form de cadastro Delphi VCL feito no estilo RAD em quatro camadas:
 - **Paridade de regras.** Toda regra que existe hoje — em eventos do DataModule, nos handlers do form, nas propriedades dos TFields (Required, Size) e nas constraints do banco — precisa continuar existindo, agora no Service. Não invente regras novas sem perguntar; liste-as como sugestão.
 - **Convenções do projeto prevalecem.** Siga o CLAUDE.md/AGENTS.md do usuário. Se não houver, use a seção "Convenções de código" de `references/arquitetura.md`.
 - **Pare quando sair do escopo.** Veja "Fora do escopo" no fim deste arquivo. É melhor avisar e perguntar do que entregar uma conversão parcial que compila mas perde comportamento.
+- **Uma pergunta por vez.** Cada pergunta ou pedido ao usuário vai numa mensagem própria e termina a mensagem; espere a resposta antes de fazer a próxima. Não junte perguntas numa lista nem num resumo do tipo "me confirme: A, B, C e D": com várias juntas, o usuário costuma responder só parte e o resto fica decidido por omissão. Isso vale para todas as perguntas da skill (form, fechar a IDE, prefixo, decisões do plano, itens fora do escopo, teste em banco de servidor). Em cada pergunta, dê só o contexto necessário, as opções e a sua recomendação. Se o agente tiver uma ferramenta de perguntas que aceita várias de uma vez (ex.: `AskUserQuestion`), mande uma por chamada.
 
 ## Fluxo
 
 ### 0. Preparação
+
+As perguntas desta etapa são feitas aqui, antes do levantamento, uma por mensagem. Não as guarde para juntar com as do plano. Pule a pergunta cuja resposta o usuário já deu no pedido (ex.: "com prefixo Clientes").
 
 1. Identifique o form (.pas + .dfm). Se o usuário não disse qual, pergunte.
 2. Veja se o projeto está aberto no RAD Studio (`Get-Process bds | Select-Object MainWindowTitle`). Se estiver, peça para o usuário fechar o projeto (File > Close All) antes de qualquer edição: a IDE mantém os arquivos em memória e sobrescreve as alterações feitas em disco quando o usuário salva. Se as ferramentas MCP da IDE estiverem disponíveis (`listOpenFiles`, `applyEdit`...), siga a skill `ide-file-operations` em vez disso.
@@ -55,7 +58,13 @@ Mostre ao usuário, de forma compacta:
 - Diferenças de comportamento inevitáveis (ex.: campo que aceitava NULL e agora vira 0).
 - Itens fora do escopo encontrados.
 
-Espere a confirmação. CRUD legado quase sempre esconde alguma regra num evento, e este é o momento barato de descobrir.
+Separe as diferenças que precisam de decisão das que são só registro. As de registro ficam no plano, sem pergunta. As que precisam de decisão você pergunta uma por vez:
+
+1. Mostre o plano e termine a mensagem com a primeira decisão pendente, com opções e recomendação.
+2. A cada resposta, faça a próxima decisão numa mensagem nova. Se uma resposta mudar o plano, diga em uma linha o que mudou.
+3. A última pergunta é a confirmação do plano, já com as decisões aplicadas.
+
+Não escreva nada antes dessa confirmação. CRUD legado quase sempre esconde alguma regra num evento, e este é o momento barato de descobrir.
 
 ### 3. Model
 
