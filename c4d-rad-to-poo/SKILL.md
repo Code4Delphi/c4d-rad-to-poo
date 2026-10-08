@@ -1,6 +1,6 @@
 ---
 name: c4d-rad-to-poo
-description: Refatora cadastros (CRUDs) Delphi VCL legados feitos no estilo RAD — DataModule com TFDQuery/TZQuery e componentes DB-aware como TDBEdit, TDBCheckBox, TDBMemo e TDBGrid ligados direto na query — para camadas Model/Repo/Service/View no padrão Repository, usando a biblioteca C4D.Conn no acesso ao banco e TFDMemTable para exibir os dados no grid. Use sempre que o usuário pedir para refatorar, modernizar, migrar, separar em camadas, aplicar Repository/Service/POO, "tirar do RAD" ou remover DataModule/TDBEdit de um form de cadastro Delphi, mesmo que ele não cite C4D.Conn nem o nome da skill.
+description: Refatora cadastros (CRUDs) Delphi VCL legados feitos no estilo RAD — DataModule com TFDQuery e componentes DB-aware como TDBEdit, TDBCheckBox, TDBMemo e TDBGrid ligados direto na query — para camadas Model/Repo/Service/View no padrão Repository, usando a biblioteca C4D.Conn no acesso ao banco e TFDMemTable para exibir os dados no grid. Use sempre que o usuário pedir para refatorar, modernizar, migrar, separar em camadas, aplicar Repository/Service/POO, "tirar do RAD" ou remover DataModule/TDBEdit de um form de cadastro Delphi, mesmo que ele não cite C4D.Conn nem o nome da skill.
 ---
 
 # c4d-rad-to-poo
@@ -37,13 +37,13 @@ Transforma um form de cadastro Delphi VCL feito no estilo RAD em quatro camadas:
 Leia e anote:
 
 - **Form (.pas/.dfm):** componentes DB-aware e seus `DataField`; os `TDataSource` e para qual dataset apontam (normalmente `<DM>.<Query>`); colunas do TDBGrid; o que cada handler faz no dataset (Open, Append, Edit, Post, Cancel, Delete, Refresh) e qualquer validação ou regra escrita ali.
-- **DataModule:** componente de conexão (TFDConnection/TZConnection) e driver; SQL da query (tabela, colunas, chave primária); TFields persistentes (tipo, Size, DisplayFormat, DisplayLabel, Required, ReadOnly); eventos com regra (BeforePost, OnNewRecord, OnValidate, AfterPost, BeforeDelete, OnGetText/OnSetText).
+- **DataModule:** componente de conexão (TFDConnection) e driver; SQL da query (tabela, colunas, chave primária); TFields persistentes (tipo, Size, DisplayFormat, DisplayLabel, Required, ReadOnly); eventos com regra (BeforePost, OnNewRecord, OnValidate, AfterPost, BeforeDelete, OnGetText/OnSetText).
 - **Banco:** estrutura da tabela quando der para ler sem risco — arquivo SQLite local, scripts DDL no projeto. Procure NOT NULL, CHECK, tamanhos, default e autoincremento; isso vira validação no Service. Não conecte em servidor de banco sem perguntar.
 - **Quem mais usa o DM:** Grep pelo nome do DM e da query no projeto inteiro. Isso decide se o DM pode virar só conexão, ser removido ou precisa ficar.
 - **Infraestrutura:** se a c4d-conn está no projeto (boss.json, `modules/c4d-conn`, `DCC_UnitSearchPath` do .dproj) e se o C4DConn já é configurado em algum lugar (Grep `C4DConn.Configs`). Detalhes em `references/conexao-c4dconn.md`.
 - **Fora do escopo:** procure os itens da seção final deste arquivo.
 
-Se a c4d-conn não estiver no projeto, pare e avise. Sugira `boss install github.com/Solusys/c4d-conn` (ou o fork que o usuário usa) e não instale nada sem ele pedir.
+Se a c4d-conn não estiver no projeto, pare e avise. Sugira `boss install github.com/Solusys/c4d-conn` (ou o fork que o usuário usa) e não instale nada sem ele pedir. Pare também se a conexão do projeto não for um `TFDConnection`: a c4d-conn trabalha só com FireDAC.
 
 ### 2. Plano — confirme antes de escrever
 
@@ -74,7 +74,7 @@ O Repo não valida, não abre transação e não mostra mensagem. `GetById` devo
 
 ### 5. Service
 
-Interface `I<Prefixo>Service` + classe com `FRepo` criado no construtor. `ValidarId` e `ValidarPreenchimento` concentram as regras levantadas na etapa 1. Insert/Update/Delete rodam dentro de transação (`C4DConn.Connection.StartTransaction/Commit/Rollback`) e relançam o erro com uma mensagem de contexto. Se o projeto já controla transação de outro jeito (ex.: `CommonDMConn.ZConnection` no Solusys), siga o padrão do projeto. Exceções: `Exception` da RTL.
+Interface `I<Prefixo>Service` + classe com `FRepo` criado no construtor. `ValidarId` e `ValidarPreenchimento` concentram as regras levantadas na etapa 1. Insert/Update/Delete rodam dentro de transação (`C4DConn.Connection.StartTransaction/Commit/Rollback`) e relançam o erro com uma mensagem de contexto. Se o projeto já controla transação de outro jeito, siga o padrão do projeto. Exceções: `Exception` da RTL.
 
 ### 6. View
 

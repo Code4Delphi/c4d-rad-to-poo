@@ -11,7 +11,7 @@ Procure, nesta ordem:
 
 Se não encontrar, pare e avise o usuário. Ele decide entre `boss install github.com/Solusys/c4d-conn` e um search path manual. Não instale por conta própria.
 
-A unit `C4D.Conn` sempre inclui os adaptadores Zeos e FireDAC. Por isso o projeto precisa do Zeos no library path, mesmo usando só FireDAC. Se a compilação reclamar de `ZConnection` ou `ZAbstractConnection`, é isso.
+A c4d-conn trabalha só com FireDAC. Se a conexão do projeto não for um `TFDConnection`, pare e pergunte como seguir.
 
 ## 2. Configuração (uma única vez, na inicialização)
 
@@ -20,19 +20,13 @@ Primeiro procure se o projeto já configura (Grep `C4DConn.Configs`). Se já con
 Se não configura, ligue o C4DConn ao componente de conexão que o projeto já tem:
 
 ```pascal
-// FireDAC
 C4DConn.Configs
   .ComponentConnectionFireDac
   .ComponentOfConnectionExisting(FDConnection);
-
-// Zeos
-C4DConn.Configs
-  .ComponentConnectionZeos
-  .ComponentOfConnectionExisting(ZConnection);
 ```
 
-- `ComponentConnectionFireDac`/`ComponentConnectionZeos` lança exceção se for chamado duas vezes. Por isso a configuração fica num ponto que roda uma vez só: o `OnCreate` do DM de conexão, criado como primeiro `Application.CreateForm` no .dpr.
-- Use sempre `ComponentOfConnectionExisting` com o componente do projeto. O adaptador FireDAC da c4d-conn só traz o driver MySQL; com o componente existente, valem o driver link e os parâmetros que o projeto já usa (SQLite, Firebird, MSSQL...).
+- `ComponentConnectionFireDac` lança exceção se for chamado duas vezes. Por isso a configuração fica num ponto que roda uma vez só: o `OnCreate` do DM de conexão, criado como primeiro `Application.CreateForm` no .dpr.
+- Use sempre `ComponentOfConnectionExisting` com o componente do projeto. O adaptador FireDAC da c4d-conn só traz os drivers MySQL e SQLite; com o componente existente, valem o driver link e os parâmetros que o projeto já usa (Firebird, MSSQL, PostgreSQL...).
 - Onde fica a conexão:
   - DM legado usado só pelo form refatorado → vira o DM de conexão (`git mv` para algo como `Conexao.DM`), mantendo só a conexão e o driver link. Veja `exemplo/Conexao.DM.pas`.
   - DM usado por outros forms → mantenha o DM, remova só a query e os fields deste cadastro e configure o C4DConn nele (ou num DM de conexão comum que o projeto já tenha).
@@ -71,7 +65,6 @@ end;
 |---|---|
 | FireDAC (SQLite, MySQL, MSSQL) | `GetLastAutoGenValue('')`. Nome vazio usa o último id da sessão. No SQLite, passar um nome faz o FireDAC ler `sqlite_sequence`, que só existe em tabelas com AUTOINCREMENT, e o Insert falha. |
 | FireDAC (Firebird, PostgreSQL com generator/sequence) | `GetLastAutoGenValue('<nome do generator/sequence>')`, ou `insert ... returning id` com `Open` |
-| Zeos | `GetLastAutoGenValue('<tabela>')`. A c4d-conn executa `select Last_Insert_ID() from <tabela>`, então isso **só funciona com MySQL**. Para outro banco no Zeos, use `returning` ou a estratégia que o projeto já usa. |
 
 O resultado é `Variant`; atribua direto ao `Integer`. Confirme no teste da etapa 9: esse é um erro que compila e só aparece em execução.
 
@@ -91,4 +84,4 @@ except
 end;
 ```
 
-A transação fica no Service, nunca no Repo: assim um Service pode chamar vários métodos de Repo na mesma transação. Se o projeto controla transação por outro objeto (no Solusys, `CommonDMConn.ZConnection.StartTransaction`), siga o projeto.
+A transação fica no Service, nunca no Repo: assim um Service pode chamar vários métodos de Repo na mesma transação. Se o projeto controla transação por outro objeto, siga o projeto.

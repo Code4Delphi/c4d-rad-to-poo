@@ -32,7 +32,6 @@ Erros de compilação comuns nesta refatoração:
 |---|---|
 | `Undeclared identifier: 'TFDMemTable'` | Faltam as units FireDAC na `uses` do form |
 | `Field <nome> does not have a corresponding component` / dfm sem campo | Declaração no .pas diferente do .dfm (nome ou classe) |
-| `File not found: 'ZConnection.dcu'` | Zeos fora do library path; a c4d-conn precisa dele |
 
 ## 3. Sobras do legado
 
@@ -85,7 +84,7 @@ begin
 end.
 ```
 
-Compilação com `dcc32` (Git Bash). O jeito mais simples é compilar o projeto principal antes (etapa 2) e apontar `-U` para a pasta de DCUs dele, que já tem a c4d-conn, o Zeos e as demais dependências compiladas. Junte as pastas de fonte das units do teste:
+Compilação com `dcc32` (Git Bash). O jeito mais simples é compilar o projeto principal antes (etapa 2) e apontar `-U` para a pasta de DCUs dele, que já tem a c4d-conn e as demais dependências compiladas. Junte as pastas de fonte das units do teste:
 
 ```bash
 "$BDS/bin/dcc32.exe" -Q -NS"System;Winapi;System.Win;Data;Data.Win;Vcl;Xml" \
@@ -93,7 +92,7 @@ Compilação com `dcc32` (Git Bash). O jeito mais simples é compilar o projeto 
   -E"out" -NU"dcu" TesteClientes.dpr
 ```
 
-Se faltar alguma unit de biblioteca, acrescente o caminho dela (do `DCC_UnitSearchPath` do .dproj ou do library path no registro) em `-U`, e em `-I` quando ela usar arquivos `.inc` (o Zeos usa).
+Se faltar alguma unit de biblioteca, acrescente o caminho dela (do `DCC_UnitSearchPath` do .dproj ou do library path no registro) em `-U`, e em `-I` quando ela usar arquivos `.inc`.
 
 Problemas conhecidos do `dcc32`:
 - **`E1026` (arquivo `.dfm` não encontrado):** acrescente as pastas dos `.dfm` usados pelas units do teste em `-R`.

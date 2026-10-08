@@ -36,8 +36,6 @@ Na prática, a skill:
     boss install github.com/Code4Delphi/c4d-conn
     ```
 
-- **ZeosLib:** a unit `C4D.Conn` referencia também o adaptador Zeos, então o ZeosLib precisa estar no library path do Delphi, mesmo em projetos que usam só FireDAC.
-
 ## Como usar
 
 1. Feche o projeto no RAD Studio. A IDE sobrescreve arquivos alterados em disco quando o projeto é salvo.

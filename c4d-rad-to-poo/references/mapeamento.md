@@ -21,7 +21,7 @@
 
 O Model não guarda NULL. Ao gravar, converta o "vazio" do Model (string vazia, data 0, FK 0) para NULL quando a coluna aceitar nulo e o legado gravava nulo. Se uma coluna numérica aceitava NULL e agora vai gravar 0, registre isso no plano como diferença de comportamento.
 
-**No FireDAC, `AddParam('x', Null)` falha em execução** (erro -335, tipo do parâmetro desconhecido): o parâmetro só ganha tipo quando recebe um valor tipado. Com Zeos a passagem direta funciona. Use este helper privado no Repo, que funciona nos dois:
+**No FireDAC, `AddParam('x', Null)` falha em execução** (erro -335, tipo do parâmetro desconhecido): o parâmetro só ganha tipo quando recebe um valor tipado. Use este helper privado no Repo:
 
 ```pascal
 procedure TClientesRepo.AddParamOuNulo(const AQuery: IC4DConnQuery; const AParam: string;
