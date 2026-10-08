@@ -44,8 +44,14 @@ Na prática, a skill:
 
    **Sugestão de prompts para utilização:**
 
-   * **Completo:** `/c4d-rad-to-poo Refatore @SuaUnit com prefixo Clientes`
-   * **Simples:** `/c4d-rad-to-poo @SuaUnit`
+   * **Completo:**
+     ```
+     /c4d-rad-to-poo Refatore @SuaUnit com prefixo Clientes
+     ```
+   * **Simples:**
+     ```
+     /c4d-rad-to-poo @SuaUnit
+     ```
 
    Na versão simples, a skill pergunta o prefixo e sugere um nome derivado da unit.
 
