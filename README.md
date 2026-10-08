@@ -46,7 +46,7 @@ Na prática, a skill:
 
    * **Completo:**
      ```
-     /c4d-rad-to-poo Refatore @SuaUnit com prefixo Clientes
+     /c4d-rad-to-poo Refatore @SuaUnit com prefixo <AddPrefixo>
      ```
    * **Simples:**
      ```
