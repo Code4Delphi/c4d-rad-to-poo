@@ -57,7 +57,7 @@ Na prática, a skill:
 ## Estrutura da skill
 
 ```
-.claude/skills/c4d-rad-to-poo/
+skills/c4d-rad-to-poo/
 ├── SKILL.md                       Fluxo da refatoração em 11 etapas, princípios e o que fica fora do escopo
 ├── references/
 │   ├── arquitetura.md             Nomes, responsabilidade de cada camada, exceções e convenções de código
