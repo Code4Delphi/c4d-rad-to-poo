@@ -30,7 +30,7 @@ Na prática, a skill:
 - **RAD Studio:** testado no Delphi 12 Athens. A validação usa o `convert.exe` e o `rsvars.bat` da instalação.
 - **C4D.Conn**, a biblioteca de acesso ao banco usada pelo Repo: [github.com/Code4Delphi/c4d-conn](https://github.com/Code4Delphi/c4d-conn). Instale antes de usar a skill:
 
-  * Instalação via Boss:
+  * Instalação via [Boss](https://github.com/HashLoad/boss):
 
     ```
     boss install github.com/Code4Delphi/c4d-conn
