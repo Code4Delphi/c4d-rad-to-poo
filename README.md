@@ -82,19 +82,3 @@ skills/c4d-rad-to-poo/
 
 O `SKILL.md` é carregado sempre que a skill é acionada. As `references` são lidas só quando necessário, e os `scripts` são executados, não lidos.
 
-## Fora do escopo (v1)
-
-A skill para e pergunta antes de converter quando encontra:
-
-- **Master-detail:** `MasterSource`/`MasterFields`, `DataSetField`, ou mais de uma tabela editada no mesmo form.
-- **Lookups:** `TDBLookupComboBox` e campos lookup ou calculados.
-- **Atualização indireta:** `TClientDataSet` com `TDataSetProvider`, cached updates ou `TDBNavigator`.
-- **SQL em eventos:** SQL executado em eventos que alteram outras tabelas.
-- **Imagens e blobs:** `TDBImage` e campos blob.
-
-## Exemplo neste repositório
-
-O cadastro de Produtos (`Src/Produtos`) foi o primeiro a ser refatorado e serviu de modelo para a skill:
-
-- **Antes:** commit `add-c4d-conn`, com DataModule + `TFDQuery` + `TDBEdit`.
-- **Depois:** commit `refactor/produtos-repository-001`, com Model, Repo, Service e View com `TFDMemTable`, mais o `Src/Conexao.DM`.
