@@ -39,9 +39,8 @@ Na prática, a skill:
 
 ## ⚡️Como usar
 
-1. Feche o projeto no RAD Studio. A IDE sobrescreve arquivos alterados em disco quando o projeto é salvo.
-2. Abra seu agente de codificação (Codex, Claude Code, Cursor, etc) na pasta do projeto.
-3. Peça a refatoração.
+1. Abra seu agente de codificação (Codex, Claude Code, Cursor, etc) na pasta do projeto. O projeto pode continuar aberto no RAD Studio; só não altere nem salve nada nele enquanto o agente trabalha.
+2. Peça a refatoração.
 
    **Sugestão de prompts para utilização:**
 
@@ -56,7 +55,8 @@ Na prática, a skill:
 
    Na versão simples, a skill pergunta o prefixo e sugere um nome derivado da unit.
 
-4. Revise o plano apresentado e confirme.
+3. Revise o plano apresentado e confirme.
+4. Ao voltar para o RAD Studio, aceite recarregar os arquivos alterados (Yes to All) antes de salvar ou compilar pela IDE. Se ela não oferecer recarregar o projeto, reabra-o (File > Reopen) para as units novas aparecerem.
 5. No fim, teste a tela seguindo o roteiro do relatório: navegar no grid, incluir, alterar, cancelar, excluir e uma validação.
 
 
