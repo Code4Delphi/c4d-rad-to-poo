@@ -1,6 +1,4 @@
-# Projeto-IA-CRUD
-
-Projeto Delphi VCL com a skill **c4d-rad-to-poo** para o [Claude Code](https://claude.com/claude-code).
+# Skill c4d-rad-to-poo
 
 A skill refatora cadastros (CRUDs) legados feitos no estilo RAD para camadas no padrão Repository. Os cadastros de origem são os que usam DataModule com query e componentes DB-aware (`TDBEdit`, `TDBCheckBox`, `TDBMemo`...) ligados direto no banco.
 
