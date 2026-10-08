@@ -36,7 +36,7 @@ Na prática, a skill:
     boss install github.com/Code4Delphi/c4d-conn
     ```
 
-## Como usar
+## ⚡️Como usar
 
 1. Feche o projeto no RAD Studio. A IDE sobrescreve arquivos alterados em disco quando o projeto é salvo.
 2. Abra seu agente de codificação (Codex, Claude Code, Cursor, etc) na pasta do projeto.
