@@ -42,13 +42,14 @@ Na prática, a skill:
 
 1. Feche o projeto no RAD Studio. A IDE sobrescreve arquivos alterados em disco quando o projeto é salvo.
 2. Abra seu agente de codificação (Codex, Claude Code, Cursor, etc) na pasta do projeto.
-3. Peça a refatoração, por exemplo:
+3. Peça a refatoração.
 
-   ```
-   Refatore o cadastro de clientes (Src\Clientes쫜lientes.pas) para o padrão Repository. Use o prefixo Clientes.
-   ```
+   **Sugestão de prompts para utilização:**
 
-   A skill também pode ser chamada direto com `/c4d-rad-to-poo`.
+   * **Completo:** `/c4d-rad-to-poo Refatore @SuaUnit com prefixo Clientes`
+   * **Simples:** `/c4d-rad-to-poo @SuaUnit`
+
+   Na versão simples, a skill pergunta o prefixo e sugere um nome derivado da unit.
 
 4. Revise o plano apresentado e confirme.
 5. No fim, teste a tela seguindo o roteiro do relatório: navegar no grid, incluir, alterar, cancelar, excluir e uma validação.
