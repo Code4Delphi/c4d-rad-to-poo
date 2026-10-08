@@ -1,6 +1,4 @@
-# Projeto-IA-CRUD
-
-Projeto Delphi VCL com a skill **c4d-rad-to-poo** para o [Claude Code](https://claude.com/claude-code).
+# Skill c4d-rad-to-poo
 
 A skill refatora cadastros (CRUDs) legados feitos no estilo RAD para camadas no padrão Repository. Os cadastros de origem são os que usam DataModule com query e componentes DB-aware (`TDBEdit`, `TDBCheckBox`, `TDBMemo`...) ligados direto no banco.
 
@@ -30,7 +28,6 @@ Na prática, a skill:
 ## Pré-requisitos
 
 - **RAD Studio:** testado no Delphi 12 Athens. A validação usa o `convert.exe` e o `rsvars.bat` da instalação.
-- **Claude Code.**
 - **C4D.Conn**, a biblioteca de acesso ao banco usada pelo Repo: [github.com/Code4Delphi/c4d-conn](https://github.com/Code4Delphi/c4d-conn). Instale antes de usar a skill:
 
   * Instalação via Boss:
@@ -44,7 +41,7 @@ Na prática, a skill:
 ## Como usar
 
 1. Feche o projeto no RAD Studio. A IDE sobrescreve arquivos alterados em disco quando o projeto é salvo.
-2. Abra o Claude Code na pasta do projeto.
+2. Abra seu agente de codificação (Codex, Claude Code, Cursor, etc) na pasta do projeto.
 3. Peça a refatoração, por exemplo:
 
    ```
@@ -56,12 +53,11 @@ Na prática, a skill:
 4. Revise o plano apresentado e confirme.
 5. No fim, teste a tela seguindo o roteiro do relatório: navegar no grid, incluir, alterar, cancelar, excluir e uma validação.
 
-A skill é do projeto: ela fica em `.claude/skills` e só é carregada quando o Claude Code está aberto nesta pasta. Para usá-la em outro sistema, copie a pasta `.claude/skills/c4d-rad-to-poo` para o `.claude/skills` daquele projeto.
 
 ## Estrutura da skill
 
 ```
-.claude/skills/c4d-rad-to-poo/
+skills/c4d-rad-to-poo/
 ├── SKILL.md                       Fluxo da refatoração em 11 etapas, princípios e o que fica fora do escopo
 ├── references/
 │   ├── arquitetura.md             Nomes, responsabilidade de cada camada, exceções e convenções de código
