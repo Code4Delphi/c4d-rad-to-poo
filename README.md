@@ -28,7 +28,6 @@ Na prática, a skill:
 ## Pré-requisitos
 
 - **RAD Studio:** testado no Delphi 12 Athens. A validação usa o `convert.exe` e o `rsvars.bat` da instalação.
-- **Claude Code.**
 - **C4D.Conn**, a biblioteca de acesso ao banco usada pelo Repo: [github.com/Code4Delphi/c4d-conn](https://github.com/Code4Delphi/c4d-conn). Instale antes de usar a skill:
 
   * Instalação via Boss:
@@ -42,7 +41,7 @@ Na prática, a skill:
 ## Como usar
 
 1. Feche o projeto no RAD Studio. A IDE sobrescreve arquivos alterados em disco quando o projeto é salvo.
-2. Abra o Claude Code na pasta do projeto.
+2. Abra seu agente de codificação (Codex, Claude Code, Cursor, etc) na pasta do projeto.
 3. Peça a refatoração, por exemplo:
 
    ```
@@ -54,7 +53,6 @@ Na prática, a skill:
 4. Revise o plano apresentado e confirme.
 5. No fim, teste a tela seguindo o roteiro do relatório: navegar no grid, incluir, alterar, cancelar, excluir e uma validação.
 
-A skill é do projeto: ela fica em `.claude/skills` e só é carregada quando o Claude Code está aberto nesta pasta. Para usá-la em outro sistema, copie a pasta `.claude/skills/c4d-rad-to-poo` para o `.claude/skills` daquele projeto.
 
 ## Estrutura da skill
 
