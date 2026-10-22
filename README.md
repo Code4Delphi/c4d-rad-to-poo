@@ -9,7 +9,7 @@ Transforma o form legado em quatro camadas:
 | Camada | Responsabilidade |
 |---|---|
 | `View (Apresentação)` | Forms e componentes visuais. Conversa só com o Service |
-| `<Prefixo>.Service` | Validações, regras de negócio, casos de uso e transação |
+| `<Prefixo>.Service` | Regras de negócio, validações, casos de uso e transação |
 | `<Prefixo>.Model` | Entidades e objetos de negócio. Classe que espelha a tabela do banco. |
 | `<Prefixo>.Repo (Persistência)` | Acesso ao banco com SQL via C4D.Conn: Insert, Update, Delete, GetById e List |
 
