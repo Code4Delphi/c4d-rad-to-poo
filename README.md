@@ -1,6 +1,11 @@
 # Skill c4d-rad-to-poo
 
-A skill refatora cadastros (CRUDs) legados feitos no estilo RAD para camadas no padrão Repository. Os cadastros de origem são os que usam DataModule com query e componentes DB-aware (`TDBEdit`, `TDBCheckBox`, `TDBMemo`...) ligados direto no banco.
+A skill refatora cadastros (CRUDs) legados feitos no estilo RAD para camadas no padrão Repository (View, Service, Model e Repository) . Os cadastros de origem são os que usam DataModule com query e componentes DB-aware (`TDBEdit`, `TDBCheckBox`, `TDBMemo`...) ligados direto no banco.
+
+View (Apresentação) — Forms e componentes visuais.
+Service — Regras de negócio e casos de uso.
+Model (Domínio) — Entidades e objetos de negócio.
+Repository (Persistência) — Operações de acesso aos dados.
 
 ## O que a skill faz
 
@@ -8,10 +13,10 @@ Transforma o form legado em quatro camadas:
 
 | Camada | Responsabilidade |
 |---|---|
-| `<Prefixo>.Model` | Classe que espelha a tabela do banco |
-| `<Prefixo>.Repo` | Acesso ao banco com SQL via C4D.Conn: Insert, Update, Delete, GetById e List |
-| `<Prefixo>.Service` | Validações, regras de negócio e transação |
-| View (o form existente) | Componentes comuns da VCL e grid ligado a um `TFDMemTable`; conversa só com o Service |
+| `View (Apresentação)` | Componentes comuns da VCL e grid ligado a um `TFDMemTable`; conversa só com o Service |
+| `<Prefixo>.Service` | Validações, regras de negócio, casos de uso e transação |
+| `<Prefixo>.Model` | Entidades e objetos de negócio. Classe que espelha a tabela do banco. |
+| `<Prefixo>.Repo (Persistência)` | Acesso ao banco com SQL via C4D.Conn: Insert, Update, Delete, GetById e List |
 
 Na prática, a skill:
 
