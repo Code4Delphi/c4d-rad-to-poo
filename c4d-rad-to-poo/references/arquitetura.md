@@ -16,7 +16,7 @@ Com o prefixo `Clientes`:
 
 Coloque as units novas na mesma pasta do form legado, a menos que o projeto já organize módulos em subpastas `Model/Repo/Service/View`; nesse caso siga o padrão existente.
 
-Gere um GUID novo para cada interface (`[guid]::NewGuid()` no PowerShell). Nunca reaproveite GUIDs do exemplo.
+Gere um GUID novo para cada interface (`[guid]::NewGuid()` no PowerShell). Nunca reaproveite GUIDs de outras interfaces.
 
 ## O que vai em cada camada
 

@@ -28,7 +28,7 @@ C4DConn.Configs
 - `ComponentConnectionFireDac` lança exceção se for chamado duas vezes. Por isso a configuração fica num ponto que roda uma vez só: o `OnCreate` do DM de conexão, criado como primeiro `Application.CreateForm` no .dpr.
 - Use sempre `ComponentOfConnectionExisting` com o componente do projeto. O adaptador FireDAC da c4d-conn só traz os drivers MySQL e SQLite; com o componente existente, valem o driver link e os parâmetros que o projeto já usa (Firebird, MSSQL, PostgreSQL...).
 - Onde fica a conexão:
-  - DM legado usado só pelo form refatorado → vira o DM de conexão (`git mv` para algo como `Conexao.DM`), mantendo só a conexão e o driver link. Veja `exemplo/Conexao.DM.pas`.
+  - DM legado usado só pelo form refatorado → vira o DM de conexão (`git mv` para algo como `Conexao.DM`), mantendo só a conexão e o driver link.
   - DM usado por outros forms → mantenha o DM, remova só a query e os fields deste cadastro e configure o C4DConn nele (ou num DM de conexão comum que o projeto já tenha).
   - DM do cadastro sem conexão própria, com a query usando a conexão de outro DM (`Connection = OutroDM.FDConnection1`) → o DM do cadastro pode ser removido. Configure o C4DConn no `OnCreate` do DM dono da conexão e garanta, no .dpr, que ele seja criado antes de qualquer uso. Não mova a conexão nem mexa nos outros cadastros que a usam: eles continuam legados e fora do escopo.
   - Projeto que já tem DM de conexão comum (no Solusys é o `CommonDMConn`, ligado no splash) → só use.

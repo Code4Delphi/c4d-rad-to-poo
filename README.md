@@ -69,13 +69,7 @@ skills/c4d-rad-to-poo/
 │   ├── arquitetura.md             Nomes, responsabilidade de cada camada, exceções e convenções de código
 │   ├── mapeamento.md              Tipo do campo → Model → componente; DB-aware → VCL comum; bloco do TFDMemTable; uses
 │   ├── conexao-c4dconn.md         Detecção e configuração da C4D.Conn, consultas, id gerado no Insert e transação
-│   ├── validacao.md               Codificação dos arquivos, validação dos .dfm, compilação e teste do Repo/Service
-│   └── exemplo/                   Cadastro de Produtos já refatorado, usado como modelo de estrutura e estilo
-│       ├── Conexao.DM.pas         DataModule de conexão que configura a C4D.Conn
-│       ├── Produtos.Model.pas     Classe que espelha a tabela product
-│       ├── Produtos.Repo.pas      SQL via C4D.Conn
-│       ├── Produtos.Service.pas   Validações e transação
-│       └── Produtos.Cad.View.pas  Form com TFDMemTable no grid e componentes comuns da VCL
+│   └── validacao.md               Codificação dos arquivos, validação dos .dfm, compilação e teste do Repo/Service
 └── scripts/
     ├── normalizar-arquivos.ps1    Converte os arquivos para ANSI (cp1252) ou UTF-8 com BOM, sempre com CRLF
     └── validar-delphi.ps1         Valida os .dfm com convert.exe e compila o projeto com MSBuild

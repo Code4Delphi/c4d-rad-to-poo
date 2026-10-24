@@ -14,7 +14,7 @@ Transforma um form de cadastro Delphi VCL feito no estilo RAD em quatro camadas:
 | `<Prefixo>.Service` | Validações, regras de negócio e transação; é quem chama o Repo |
 | View (o form existente) | Componentes comuns (TEdit, TCheckBox...), grid ligado a um TFDMemTable, conversa só com o Service |
 
-`references/exemplo/` tem os `.pas` de um cadastro real já refatorado, compilado e testado: `Produtos.Model`, `Produtos.Repo`, `Produtos.Service`, `Produtos.Cad.View` e `Conexao.DM`. Leia esses `.pas` uma vez antes de começar: é a forma mais rápida de entender o resultado esperado. Use-os como modelo de estrutura e estilo, não como texto para copiar; cada CRUD tem seus próprios campos e regras. Os trechos de `.dfm` que você vai precisar estão em `references/mapeamento.md`.
+Os trechos de `.dfm` que você vai precisar estão em `references/mapeamento.md`.
 
 ## Princípios
 
@@ -72,7 +72,7 @@ Uma classe com campos privados e propriedades espelhando a tabela, com tipos con
 
 ### 4. Repo
 
-Interface `I<Prefixo>Repo` + classe `T<Prefixo>Repo(TInterfacedObject)` com `class function New`, métodos da interface em `protected` (só acessíveis via interface) e helpers privados `AddParams` e `LoadFields`. Siga `exemplo/Produtos.Repo.pas` e as regras de `references/conexao-c4dconn.md`. As duas que mais causam erro:
+Interface `I<Prefixo>Repo` + classe `T<Prefixo>Repo(TInterfacedObject)` com `class function New`, métodos da interface em `protected` (só acessíveis via interface) e helpers privados `AddParams` e `LoadFields`. Siga as regras de `references/conexao-c4dconn.md`. As duas que mais causam erro:
 
 - Monte o SQL inteiro antes do primeiro `AddParam`: no FireDAC, cada `Add` recria os parâmetros.
 - Para pegar o id gerado no FireDAC use `GetLastAutoGenValue('')`. Passando o nome do campo, o SQLite procura a tabela `sqlite_sequence` e falha.
@@ -89,7 +89,7 @@ Interface `I<Prefixo>Service` + classe com `FRepo` criado no construtor. `Valida
 
 **.dfm** — troque cada componente DB-aware pelo equivalente comum e remova as propriedades que só existem na versão DB (tabela em `references/mapeamento.md`). Renomeie os componentes fora do padrão de prefixos (`Label1` → `lbNome`, `DataSource1` → `DS_<Prefixo>`, `DBGrid1` → `grid<Prefixo>`), atualizando `FocusControl` e as referências no código. Adicione `MTB_<Prefixo>` (TFDMemTable) com fields persistentes copiados dos TFields do DM — FieldName, Size, DisplayFormat, DisplayLabel; sem Origin, ProviderFlags ou Required — e aponte `DS_<Prefixo>` para ele. Mantenha `KeyPreview = True`.
 
-**.pas** — cada objeto do .dfm precisa de um campo com o mesmo nome e classe na declaração do form. Ajuste a `uses`: tire `Vcl.DBCtrls` e a unit do DM; inclua as units FireDAC do TFDMemTable e as units dos componentes novos. A IDE adicionaria essas units sozinha, mas na edição em texto isso é com você. A tabela abaixo mostra como o legado vira o novo; o código completo está em `exemplo/Produtos.Cad.View.pas`:
+**.pas** — cada objeto do .dfm precisa de um campo com o mesmo nome e classe na declaração do form. Ajuste a `uses`: tire `Vcl.DBCtrls` e a unit do DM; inclua as units FireDAC do TFDMemTable e as units dos componentes novos. A IDE adicionaria essas units sozinha, mas na edição em texto isso é com você. A tabela abaixo mostra como o legado vira o novo:
 
 | Legado | Novo |
 |---|---|
